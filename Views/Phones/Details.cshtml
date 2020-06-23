@@ -1,0 +1,78 @@
+﻿@model TelefonSatis.Models.Phone
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Phone</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MinDesc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MinDesc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Images)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Images)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalScore)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalScore)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPeople)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalPeople)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Score)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.brand)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.brand.BrandId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.PhoneId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

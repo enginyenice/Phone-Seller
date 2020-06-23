@@ -1,0 +1,70 @@
+﻿@model TelefonSatis.Models.Phone
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="col-lg-3">
+
+    <h1 class="my-4">Shop Name</h1>
+    <div class="list-group">
+        <a href="#" class="list-group-item">Category 1</a>
+        <a href="#" class="list-group-item">Category 2</a>
+        <a href="#" class="list-group-item">Category 3</a>
+    </div>
+</div>
+<div class="col-lg-9">
+
+    <div class="card mt-4">
+        <img class="card-img-top img-fluid" src="https://picsum.photos/900/400" alt="">
+        <div class="card-body">
+            <h3 class="card-title">@Model.brand.BrandName - @Model.Name</h3>
+            <h4>Price: @Model.Price₺</h4>
+            <h5>Color: @Model.Color</h5>
+            <p class="card-text">@Model.MinDesc</p>
+            <span class="text-warning">
+                @{ int Score = Int32.Parse(Model.Score);
+                    string yildiz = "";
+                    int FiveScore = 0;
+                }
+                @if (Score < 5)
+                {
+                    FiveScore = 5 - Score;
+                }
+                @for (int i = 0; i < Score; i++)
+                {
+                    @:  <i class='fas fa-star'></i>
+                }
+                @for (int i = 0; i < FiveScore; i++)
+                {
+                    @:  <i class='far fa-star'></i>
+                }
+            </span>
+            (@Score stars)
+        </div>
+    </div>
+    <!-- /.card -->
+    <div class="card card-outline-secondary my-4">
+        <div class="card-header">
+            Product Details
+        </div>
+        <div class="card-body">
+            @Model.Description
+        </div>
+    </div>
+
+
+    <div class="card card-outline-secondary my-4">
+        <div class="card-header">
+            Product Reviews
+        </div>
+        <div class="card-body">
+            @foreach (var item in Model.comments)
+            {
+                <p>@item.UserComment</p>
+                <small class="text-muted">Posted by Anonymous</small>
+                <hr />
+            }
+            <a href="#" class="btn btn-success">Leave a Review</a>
+        </div>
+    </div>
+    <!-- /.card -->
+    </div>
