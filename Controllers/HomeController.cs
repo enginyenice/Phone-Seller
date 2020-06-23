@@ -19,7 +19,8 @@ namespace TelefonSatis.Controllers
         }
         public async Task<IActionResult> Index()
         {
-
+            ICollection<Brand> personlist = _context.Brands.ToList();
+            ViewBag.data = personlist;
             var dataBaseContex = _context.Phones.Include(p => p.brand);
             
             return View(await dataBaseContex.ToListAsync());

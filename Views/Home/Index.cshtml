@@ -2,6 +2,18 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+
+
+
+<div class="col-lg-3">
+    <h1 class="my-4">Shop Name</h1>
+    <div class="list-group">
+        @foreach (var person in ViewBag.data)
+        {
+            <a href="#" class="list-group-item">@person.BrandName</a>
+        }
+    </div>
+</div>
 <div class="col-lg-9">
     <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -61,8 +73,6 @@
                             {
                                 @:  <i class='far fa-star'></i>
                             }
-
-
                         </small>
                         (@Score stars)
                     </div>
