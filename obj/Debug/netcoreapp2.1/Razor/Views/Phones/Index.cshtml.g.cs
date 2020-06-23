@@ -66,7 +66,7 @@ using TelefonSatis.Models;
             WriteLiteral("\r\n<h2>Index</h2>\r\n\r\n<p>\r\n    ");
             EndContext();
             BeginContext(119, 37, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "79a216d6dca147eaa56ca6bc2f79887c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2ab4297c35d048b2899c64fe93e6aa54", async() => {
                 BeginContext(142, 10, true);
                 WriteLiteral("Create New");
                 EndContext();
@@ -316,7 +316,7 @@ using TelefonSatis.Models;
             WriteLiteral("\r\n            </td>\r\n            <td>\r\n                ");
             EndContext();
             BeginContext(2548, 58, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6b388dff38954d16981bc441a88025ec", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "34c8146195bc4f07bfdf8aa940e3f5b9", async() => {
                 BeginContext(2598, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -351,7 +351,7 @@ using TelefonSatis.Models;
             WriteLiteral(" |\r\n                ");
             EndContext();
             BeginContext(2626, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5f5bbcf58ba2489d9155c88ecdd52be9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8d12d2f0bb914c39b9abb873ae5aa96a", async() => {
                 BeginContext(2679, 7, true);
                 WriteLiteral("Details");
                 EndContext();
@@ -386,7 +386,7 @@ using TelefonSatis.Models;
             WriteLiteral(" |\r\n                ");
             EndContext();
             BeginContext(2710, 62, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7861b0c2dbcc4ff79a5ff0021e038596", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e07892e5202248238fe5b19c9d6a8997", async() => {
                 BeginContext(2762, 6, true);
                 WriteLiteral("Delete");
                 EndContext();
