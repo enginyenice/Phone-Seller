@@ -1,0 +1,75 @@
+﻿@model IEnumerable<TelefonSatis.Models.Phone>
+@{
+    ViewData["Title"] = "Products";
+}
+
+
+
+<div class="col-lg-3">
+    <h4 class="my-4">&nbsp;&nbsp;Kategoriler</h4>
+    <div class="list-group">
+        @foreach (var person in ViewBag.data)
+        {
+            <a href="#" class="list-group-item">@person.BrandName</a>
+        }
+    </div>
+</div>
+
+<div class="col-lg-9">
+    <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <h2>Kategori Adı</h2>
+    <hr width="100%" color="#17a2b8" size="4">
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="https://picsum.photos/700/400" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a asp-action="Detail" asp-route-id="@item.PhoneId">@Html.DisplayFor(modelItem => item.brand.BrandName) - @Html.DisplayFor(modelItem => item.Name)</a>
+                        </h4>
+                        <h5>@Html.DisplayFor(modelItem => item.Price)₺</h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.MinDesc)</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-warning">
+                            @{ int Score = Int32.Parse(item.Score);
+                                int FiveScore = 0;
+                            }
+                            @if (Score < 5)
+                            {
+                                FiveScore = 5 - Score;
+                            }
+                            @for (int i = 0; i < Score; i++)
+                            {
+                                @:  <i class='fas fa-star'></i>
+                            }
+                            @for (int i = 0; i < FiveScore; i++)
+                            {
+                                @:  <i class='far fa-star'></i>
+                            }
+                        </small>
+                        (@Score stars)
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
