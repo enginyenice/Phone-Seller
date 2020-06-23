@@ -21,6 +21,7 @@ namespace TelefonSatis.Controllers
         {
 
             var dataBaseContex = _context.Phones.Include(p => p.brand);
+            
             return View(await dataBaseContex.ToListAsync());
         }
 
