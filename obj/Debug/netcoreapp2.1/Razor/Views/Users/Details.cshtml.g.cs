@@ -144,7 +144,7 @@ using TelefonSatis.Models;
             WriteLiteral("\r\n        </dd>\r\n    </dl>\r\n</div>\r\n<div>\r\n    ");
             EndContext();
             BeginContext(884, 58, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0a1eede347b44c008fb04663baa8c3fc", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "73601096466d48db9983353fba30079d", async() => {
                 BeginContext(934, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -179,7 +179,7 @@ using TelefonSatis.Models;
             WriteLiteral(" |\r\n    ");
             EndContext();
             BeginContext(950, 38, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6f608e01fff84b94aeb7be45b71d28e5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7808291bb61d42d7ab897d38b0c3ed44", async() => {
                 BeginContext(972, 12, true);
                 WriteLiteral("Back to List");
                 EndContext();
