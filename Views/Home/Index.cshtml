@@ -1,7 +1,9 @@
-﻿@model IEnumerable<TelefonSatis.Models.Phone>
-@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
+@model IEnumerable<TelefonSatis.Models.Phone>
+
+
+@{ ViewData["Title"] = "Home Page"; }
+
 <div class="col-lg-9">
     <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -39,7 +41,7 @@
                     <a href="#"><img class="card-img-top" src="https://picsum.photos/700/400" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a asp-action="Detail" asp-route-id="@item.PhoneId">@Html.DisplayFor(modelItem => item.brand.BrandName) - @Html.DisplayFor(modelItem => item.Name)</a>
+                            <a asp-action="Detail" asp-route-id="@item.">@Html.DisplayFor(modelItem => item.brand.BrandName) - @Html.DisplayFor(modelItem => item.Name)</a>
                         </h4>
                         <h5>@Html.DisplayFor(modelItem => item.Price)₺</h5>
                         <p class="card-text">@Html.DisplayFor(modelItem => item.MinDesc)</p>

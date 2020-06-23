@@ -17,11 +17,13 @@ namespace TelefonSatis.Controllers
         {
             _context = context;
         }
+
+
         public async Task<IActionResult> Index()
         {
 
             var dataBaseContex = _context.Phones.Include(p => p.brand);
-            
+                        
             return View(await dataBaseContex.ToListAsync());
         }
 

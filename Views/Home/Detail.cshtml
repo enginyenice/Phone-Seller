@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Details";
 }
-@Html.Partial("~/Views/Shared/Category.cshtml")
+
 <div class="col-lg-9">
 
     <div class="card mt-4">
@@ -16,7 +16,6 @@
             <p class="card-text">@Model.MinDesc</p>
             <span class="text-warning">
                 @{ int Score = Int32.Parse(Model.Score);
-                    string yildiz = "";
                     int FiveScore = 0;
                 }
                 @if (Score < 5)
