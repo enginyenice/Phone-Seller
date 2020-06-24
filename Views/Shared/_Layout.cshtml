@@ -1,4 +1,21 @@
 ﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
+
+
+
+@{ 
+    string data = Context.Request.GetEncodedUrl();
+
+    string[] parcalar = data.Split("/");
+    string selectLink = "home";
+    string active = "active";
+    if (parcalar.Length > 4)
+    {
+        selectLink = parcalar[4].ToString();
+    }
+}
+
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -24,13 +41,22 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item 
+                            @if (selectLink == "home") {
+                                @active
+                        } ">
                             <a class="nav-link" href="@Url.Action("Index", "Home")">
                                 Anasayfa
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Products", "Home")">Contact</a>
+                        <li class="nav-item
+                            @if (selectLink == "Products") {
+                                @active
+                        }
+                            
+                            
+                            ">
+                            <a class="nav-link" href="@Url.Action("Products", "Home")">Tüm Telefonlar</a>
                         </li>
 
                         @{
@@ -58,10 +84,18 @@
                             else
                             {
 
-                                <li class="nav-item">
+                                <li class="nav-item 
+                                      @if (selectLink == "Login") {
+                                @active
+                        }
+                                    ">
                                     <a class="nav-link" href="@Url.Action("Login", "Account")">Giriş Yap</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item 
+                                      @if (selectLink == "Register") {
+                                @active
+                        }
+                                    ">
                                     <a class="nav-link" href="@Url.Action("Register", "Account")">Kayıt Ol</a>
                                 </li>
                             }
