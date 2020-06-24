@@ -48,17 +48,47 @@
         <div class="card-footer text-right">
 
             @{
+                int status = 0;
                 string userName = Context.Session.GetString("userName");
+                string cardData = Context.Session.GetString("CartData");
+                if (cardData != null)
+                {
+                    string[] parcala = cardData.Split(",");
+                    for (int i = 0; i < parcala.Length - 1; i++)
+                    {
+                        if (Int32.Parse(parcala[i]) == Model.PhoneId)
+                        {
+                            status = 1;
+                        }
+                    }
+                }
+
+
                 int userId = (Context.Session.GetString("userId") == null) ? 0 : Int32.Parse(Context.Session.GetString("userId"));
                 if (userName != null)
                 {
-                    <a class="btn btn-outline-primary" href="#"><i class="fas fa-shopping-cart"></i> Sepete Ekle</a>
-                }
-                else
-                {
-                    <a class="btn btn-outline-primary" href="@Url.Action("Register", "Account")"><i class="far fa-address-book"></i> Sepete Eklemek İçin Kayıt Ol</a>
-                }
-            }
+                    if (status == 1)
+                    {
+                        <p><i class="far fa-check-square"></i> Sepete Eklendi</p>
+                    }
+                    else
+                    {
+                        
+                            @using (Html.BeginForm("DetailCartAdd", "Home", FormMethod.Post, new { }))
+                            {
+
+                                <input id="PhoneId" name="PhoneId" value="@Model.PhoneId" type="hidden" />
+
+                                <button class="btn btn-outline-primary" type="submit"><i class="fas fa-shopping-cart"></i> Sepete Ekle</button>
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        <a class="btn btn-outline-primary" href="@Url.Action("Register", "Account")"><i class="far fa-address-book"></i> Sepete Eklemek İçin Kayıt Ol</a>
+        }
+}
 
 
 

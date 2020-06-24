@@ -61,6 +61,10 @@ namespace TelefonSatis.Controllers
 return View(phone);
 }
 
+
+
+
+
         public async Task<IActionResult> Products(int? id = 0,string search="")
         {
             var brand = _context.Brands
@@ -87,6 +91,25 @@ return View(phone);
             }
             return View(brand);
         }
+
+
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> DetailCartAdd(int? id,  int PhoneId)
+        {
+
+
+            var cartData = HttpContext.Session.GetString("CartData");
+
+            cartData += PhoneId + ",";
+            HttpContext.Session.SetString("CartData", cartData);
+
+            return RedirectToAction("Index","Home");
+
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Detail(int? id,int Score, string Comment,int PhoneId, int UserId)
