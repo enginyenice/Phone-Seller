@@ -13,8 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using TelefonSatis.Data;
 using TelefonSatis.Models;
-using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace TelefonSatis.Controllers
 {
@@ -31,6 +31,8 @@ namespace TelefonSatis.Controllers
         // GET: Users/Create
         public IActionResult Login()
         {
+            TempData["Uyari"] = "";
+
             return View();
         }
 
@@ -45,21 +47,44 @@ namespace TelefonSatis.Controllers
 
             if(result > 0)
             {
+                var userProfile = _context.Users.Select(User => User).Where(u => u.Mail == Mail && u.Password == Password);
                 //Kullanici Bilgilerini Cek
-                string mail         = Mail;
-                string userName     = "";
-                string password     = "";
-                string permission   = "";
 
-                //HttpContext.Session.SetString("Mail", mail);
-                //HttpContext.Session.SetString("userName", userName);
-                //HttpContext.Session.SetString("Permission", permission);
-                return View("Index");
-            }else
+                string mail = "";
+                string userName = "";
+                string permission = "";
+                foreach (var item in userProfile)
+                {
+                    mail        = item.Mail;
+                    userName    = item.UserName;
+                    permission = item.Permission;
+                }
+
+
+
+
+                HttpContext.Session.SetString("userName", userName);
+                HttpContext.Session.SetString("Mail", mail);
+                HttpContext.Session.SetString("Permission", permission);
+
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+            else
             {
-
+                TempData["Uyari"] = "Email veya parola yanlış";
                 return View("Login");
             }
+        }
+
+
+        public IActionResult Logout()
+        {
+            TempData["Uyari"] = "";
+            HttpContext.Session.Remove("userName");
+            HttpContext.Session.Remove("Mail");
+            HttpContext.Session.Remove("Permission");
+
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
 

@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TelefonSatis.Data;
@@ -16,15 +19,21 @@ namespace TelefonSatis.Controllers
         public HomeController(DataBaseContex context)
         {
             _context = context;
+            
         }
 
-
+        
         public async Task<IActionResult> Index()
         {
+
             ICollection<Brand> personlist = _context.Brands.ToList();
             ViewBag.data = personlist;
             var dataBaseContex = _context.Phones.Include(p => p.brand);
-                        
+            /*
+            ViewBag.sessionMail           = HttpContext.Session.GetString("Mail");
+            ViewBag.sessionUserName       =  HttpContext.Session.GetString("userName");
+            ViewBag.sessionPermission     = HttpContext.Session.GetString("Permission");
+            */
             return View(await dataBaseContex.ToListAsync());
         }
 
@@ -53,6 +62,9 @@ namespace TelefonSatis.Controllers
 
         public async Task<IActionResult> Detail(int? id)
         {
+
+          
+
             ICollection<Brand> personlist = _context.Brands.ToList();
             ViewBag.data = personlist;
 

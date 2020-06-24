@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="utf-8" />
@@ -30,21 +31,43 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index", "AdminPanel")">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Create", "Users")">Services</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Products", "Home")">Contact</a>
                         </li>
 
+                        @{
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Login", "Account")">Login</a>
-                        </li>
+                            string userName = Context.Session.GetString("userName");
+                            string permission = Context.Session.GetString("Permission");
+                            if (userName != null)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Login", "Account")">@userName - Hesap Ayarlarım</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Login", "Account")">Sepetim</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Logout", "Account")">Çıkış Yap</a>
+                                </li>
+                                if (permission == "Admin")
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Index", "AdminPanel")">Yonetim Paneli</a>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Login", "Account")">Giriş Yap</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Create", "Users")">Kayıt Ol</a>
+                                </li>
+                            }
 
+                        }
                     </ul>
                 </div>
             </div>
