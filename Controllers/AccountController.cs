@@ -27,6 +27,7 @@ namespace TelefonSatis.Controllers
             _context = context;
         }
 
+        #region Login
 
         // GET: Users/Create
         public IActionResult Login()
@@ -75,8 +76,8 @@ namespace TelefonSatis.Controllers
                 return View("Login");
             }
         }
-
-
+        #endregion
+        #region Logout
         public IActionResult Logout()
         {
             TempData["Uyari"] = "";
@@ -86,7 +87,51 @@ namespace TelefonSatis.Controllers
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
+        #endregion
 
+
+
+        // GET: Users/Create
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        // POST: Users/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(string Mail,string Password,string UserName)
+        {
+            if (ModelState.IsValid)
+            {
+                int userCount =_context.Users.Where(u => u.UserName == UserName).Count();
+                int mailCount = _context.Users.Where(u => u.Mail == Mail).Count();
+                if(userCount > 0)
+                {
+                    TempData["Uyari"] = "Username Dedected...";
+                    return View();
+
+                } else if(mailCount > 0)
+                {
+                    TempData["Uyari"] = "Mail Dedected...";
+                    return View();
+                } else
+                {
+                    User user = new User();
+                    user.Mail       = Mail;
+                    user.Password   = Password;
+                    user.UserName   = UserName;
+                    user.Permission = "Customer";
+                    _context.Add(user);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Login");
+                }
+               
+            }
+            return View();
+        }
 
 
     }

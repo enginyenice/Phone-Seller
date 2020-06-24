@@ -63,9 +63,7 @@ namespace TelefonSatis.Controllers
         public async Task<IActionResult> Detail(int? id)
         {
 
-          
-
-            ICollection<Brand> personlist = _context.Brands.ToList();
+              ICollection <Brand> personlist = _context.Brands.ToList();
             ViewBag.data = personlist;
 
             if (id == null)

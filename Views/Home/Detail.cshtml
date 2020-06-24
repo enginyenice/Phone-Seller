@@ -1,4 +1,5 @@
 ﻿@model TelefonSatis.Models.Phone
+@using Microsoft.AspNetCore.Http
 
 
 @{
@@ -7,15 +8,15 @@
 
 
 
-    <div class="col-lg-3">
-        <h1 class="my-4">Shop Name</h1>
-        <div class="list-group">
-            @foreach (var person in ViewBag.data)
-            {
-                <a href="#" class="list-group-item">@person.BrandName</a>
-            }
-        </div>
+<div class="col-lg-3">
+    <h1 class="my-4">Shop Name</h1>
+    <div class="list-group">
+        @foreach (var person in ViewBag.data)
+        {
+            <a href="#" class="list-group-item">@person.BrandName</a>
+        }
     </div>
+</div>
 
 
 <div class="col-lg-9">
@@ -69,38 +70,44 @@
                 <small class="text-muted">Posted by Anonymous</small>
                 <hr />
             }
-            <div class="col col-md-12 text-right">
-                <button onclick="commentButton()" id="commentButton" class="btn btn-success">Create Comment</button>
-            </div>
-            <hr />
-            <div class="col col-md-12">
-                <form id="commentForm" style="display:none;">
-                    <label>Point:</label>
-                    <select class="custom-select">
-
-                        <option selected value="5">5</option>
-                        <option value="4">4</option>
-                        <option value="3">3</option>
-                        <option value="2">2</option>
-                        <option value="1">1</option>
-
-
-                    </select>
+            @{
+                string userName = Context.Session.GetString("userName");
+                if (userName != null)
+                {
+                    <div class="col col-md-12 text-right">
+                        <button onclick="commentButton()" id="commentButton" class="btn btn-success">Create Comment</button>
+                    </div>
                     <hr />
+                    <div class="col col-md-12">
+                        <form id="commentForm" style="display:none;">
+                            <label>Point:</label>
+                            <select class="custom-select">
 
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Your review</span>
-                        </div>
-                        <textarea class="form-control" aria-label="Comment"></textarea>
-                    </div>
-                    <br />
-                    <div class="text-right">
-                        <button onclick="" id="" class="btn btn-outline-info">Submit</button>
-                    </div>
+                                <option selected value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
 
-                </form>
-            </div>
+
+                            </select>
+                            <hr />
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Your review</span>
+                                </div>
+                                <textarea class="form-control" aria-label="Comment"></textarea>
+                            </div>
+                            <br />
+                            <div class="text-right">
+                                <button onclick="" id="" class="btn btn-outline-info">Submit</button>
+                            </div>
+
+                        </form>
+                    </div>
+                }
+            }
         </div>
     </div>
     <!-- /.card -->
@@ -109,20 +116,20 @@
 <script>
     let display = "block";
     function commentButton() {
-        
+
         let form = document.getElementById("commentForm");
         if (display == "block") {
             form.style.display = display;
-            display = "none";    
+            display = "none";
             form.classList.add("animate__zoomOutRight");
- 
+
         } else {
-            
+
             form.classList.add("animate__zoomOutRight");
             form.style.display = display;
             display = "block";
 
         }
-        
+
     }
 </script>
