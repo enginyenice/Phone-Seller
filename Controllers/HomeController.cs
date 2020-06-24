@@ -37,33 +37,10 @@ namespace TelefonSatis.Controllers
             return View(await dataBaseContex.ToListAsync());
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public async Task<IActionResult> Products()
-        {
-            ICollection<Brand> personlist = _context.Brands.ToList();
-            ViewBag.data = personlist;
-            var dataBaseContex = _context.Phones.Include(p => p.brand);
-
-            return View(await dataBaseContex.ToListAsync());
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
         public async Task<IActionResult> Detail(int? id)
         {
 
-              ICollection <Brand> personlist = _context.Brands.ToList();
+            ICollection <Brand> personlist = _context.Brands.ToList();
             ViewBag.data = personlist;
 
             if (id == null)
@@ -83,6 +60,69 @@ namespace TelefonSatis.Controllers
 
 return View(phone);
 }
+
+        [HttpPost]
+        public async Task<IActionResult> Detail(int? id,int Score, string Comment,int PhoneId, int UserId)
+        {
+            int _score      = Score;
+            string _comment = Comment;
+            int _phoneId    = PhoneId;
+            int _userId     = UserId;
+            var phoneDetail = _context.Phones.Select(Phone => Phone).Where(p => p.PhoneId == _phoneId);
+            int phoneDetailTotalScore = 0;
+            int phoneDetailTotalPeople = 0;
+            int score = 0;
+            foreach (var item in phoneDetail)
+            {
+                phoneDetailTotalPeople = Int32.Parse(item.TotalPeople);
+                phoneDetailTotalScore = Int32.Parse(item.TotalScore);
+
+            }
+
+            phoneDetailTotalPeople = phoneDetailTotalPeople + 1;
+            phoneDetailTotalScore = phoneDetailTotalScore + _score;
+            score = phoneDetailTotalScore / phoneDetailTotalPeople;
+
+            
+            Phone phoneCommentEdit = _context.Phones.SingleOrDefault(k => k.PhoneId == _userId);
+            
+            phoneCommentEdit.TotalPeople = phoneDetailTotalPeople.ToString();
+            phoneCommentEdit.TotalScore = phoneDetailTotalScore.ToString();
+            phoneCommentEdit.Score =  score.ToString();
+            _context.SaveChanges();
+
+            Comment com = new Comment
+            {
+                PhoneId = _phoneId,
+                UserId = _userId,
+                UserComment = _comment
+            };
+            _context.Comments.Add(com);
+            _context.SaveChanges();
+
+            ICollection<Brand> personlist = _context.Brands.ToList();
+            ViewBag.data = personlist;
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var phone = _context.Phones
+                            .Include(m => m.brand)
+                            .Include(m => m.comments)
+                            .First(m => m.PhoneId == id);
+
+            if (phone == null)
+            {
+                return NotFound();
+            }
+
+            return View(phone);
+
+        }
+
+
 public IActionResult Privacy()
 {
 return View();

@@ -54,16 +54,18 @@ namespace TelefonSatis.Controllers
                 string mail = "";
                 string userName = "";
                 string permission = "";
+                string UserId   = ""; 
                 foreach (var item in userProfile)
                 {
+                    UserId      = item.UserId.ToString();
                     mail        = item.Mail;
                     userName    = item.UserName;
-                    permission = item.Permission;
+                    permission  = item.Permission;
                 }
 
 
 
-
+                HttpContext.Session.SetString("userId", UserId);
                 HttpContext.Session.SetString("userName", userName);
                 HttpContext.Session.SetString("Mail", mail);
                 HttpContext.Session.SetString("Permission", permission);
@@ -119,11 +121,13 @@ namespace TelefonSatis.Controllers
                     return View();
                 } else
                 {
-                    User user = new User();
-                    user.Mail       = Mail;
-                    user.Password   = Password;
-                    user.UserName   = UserName;
-                    user.Permission = "Customer";
+                    User user = new User
+                    {
+                        Mail = Mail,
+                        Password = Password,
+                        UserName = UserName,
+                        Permission = "Customer"
+                    };
                     _context.Add(user);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Login");

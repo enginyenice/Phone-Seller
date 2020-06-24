@@ -72,6 +72,7 @@
             }
             @{
                 string userName = Context.Session.GetString("userName");
+                int userId      = Int32.Parse(Context.Session.GetString("userId"));
                 if (userName != null)
                 {
                     <div class="col col-md-12 text-right">
@@ -79,10 +80,11 @@
                     </div>
                     <hr />
                     <div class="col col-md-12">
-                        <form id="commentForm" style="display:none;">
+                        @using (Html.BeginForm())
+                        {
+                        <div id="commentForm" style="display:none;">
                             <label>Point:</label>
-                            <select class="custom-select">
-
+                            <select name="Score" id="Score" class="custom-select">
                                 <option selected value="5">5</option>
                                 <option value="4">4</option>
                                 <option value="3">3</option>
@@ -97,15 +99,17 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Your review</span>
                                 </div>
-                                <textarea class="form-control" aria-label="Comment"></textarea>
+                                <textarea name="Comment" id="Comment" class="form-control" aria-label="Comment"></textarea>
                             </div>
                             <br />
                             <div class="text-right">
+                                <input id="PhoneId" name="PhoneId" value="@Model.PhoneId" type="hidden" />
+                                <input id="UserId" name="UserId" value="@userId" type="hidden" />
                                 <button onclick="" id="" class="btn btn-outline-info">Submit</button>
                             </div>
-
-                        </form>
-                    </div>
+                        </div>
+                        }
+                        </div>
                 }
             }
         </div>
