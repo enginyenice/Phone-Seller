@@ -88,12 +88,6 @@ return View(phone);
             return View(brand);
         }
 
-
-
-
-
-
-
         [HttpPost]
         public async Task<IActionResult> Detail(int? id,int Score, string Comment,int PhoneId, int UserId)
         {
