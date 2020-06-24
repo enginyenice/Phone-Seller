@@ -24,31 +24,35 @@
 
     <h4 class="my-4">&nbsp;&nbsp;Kategoriler</h4>
     <div class="list-group">
-        <div class="form-group">
-            <input type="search" class="form-control" id="SearchBar" aria-describedby="emailHelp" placeholder="Arama Yapın">
-        </div>
-        @if (selectId == 0)
+        @using (Html.BeginForm())
         {
-            <a asp-action="Products" asp-route-id="" class="list-group-item active">Tüm kategoriler</a>
+            <div class="form-group">
+                <input type="search" class="form-control" id="SearchBar" name="search" placeholder="Arama Yapın">
+                <input asp-action="Products" type="submit" value="Arama Yap" style="width:100%" class="btn btn-outline-success mr-2" />
+            </div>
         }
-        else
-        {
-            <a asp-action="Products" asp-route-id="" class="list-group-item ">Tüm kategoriler</a>
-        }
-        @foreach (var person in Model)
-        {
-            @if (person.BrandId == selectId)
+            @if (selectId == 0)
             {
-                kategoriName = person.BrandName;
-
-                <a asp-action="Products" asp-route-id="@person.BrandId" class="list-group-item active">@person.BrandName</a>
+                <a asp-action="Products" asp-route-id="" class="list-group-item active">Tüm kategoriler</a>
             }
             else
             {
-                <a asp-action="Products" asp-route-id="@person.BrandId" class="list-group-item">@person.BrandName</a>
+                <a asp-action="Products" asp-route-id="" class="list-group-item ">Tüm kategoriler</a>
             }
-        }
-    </div>
+            @foreach (var person in Model)
+            {
+                @if (person.BrandId == selectId)
+                {
+                    kategoriName = person.BrandName;
+
+                    <a asp-action="Products" asp-route-id="@person.BrandId" class="list-group-item active">@person.BrandName</a>
+                }
+                else
+                {
+                    <a asp-action="Products" asp-route-id="@person.BrandId" class="list-group-item">@person.BrandName</a>
+                }
+            }
+        </div>
 </div>
 
 

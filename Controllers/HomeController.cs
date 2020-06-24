@@ -61,11 +61,13 @@ namespace TelefonSatis.Controllers
 return View(phone);
 }
 
-        public async Task<IActionResult> Products(int? id = 0)
+        public async Task<IActionResult> Products(int? id = 0,string search="")
         {
-
             var brand = _context.Brands
-                           .Select(b => b);
+                          .Select(b => b);
+            if (search == "")
+            { 
+           
             ICollection<Phone> phoneList;
             if (id != 0)
             {
@@ -76,8 +78,20 @@ return View(phone);
                 
             }
             ViewBag.data = phoneList;
+            
+            } else
+            {
+                ICollection<Phone> phoneList;
+                phoneList = _context.Phones.Where(p => p.Name.Contains(search)).ToList();
+                ViewBag.data = phoneList;
+            }
             return View(brand);
         }
+
+
+
+
+
 
 
         [HttpPost]
@@ -98,8 +112,8 @@ return View(phone);
 
             }
 
-            phoneDetailTotalPeople = phoneDetailTotalPeople +  1;
-            phoneDetailTotalScore = phoneDetailTotalScore + _score;
+            phoneDetailTotalPeople += 1;
+            phoneDetailTotalScore += _score;
             score = phoneDetailTotalScore / phoneDetailTotalPeople;
 
             
