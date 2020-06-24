@@ -61,6 +61,30 @@ namespace TelefonSatis.Controllers
 return View(phone);
 }
 
+
+
+
+        public async Task<IActionResult> Products(int? id = 0)
+        {
+
+            var brand = _context.Brands
+                           .Select(b => b);
+            ICollection<Phone> phoneList;
+            if (id != 0)
+            {
+               phoneList = _context.Phones.Where(p => p.BrandId == id).ToList();
+            }else
+            {
+              phoneList = _context.Phones.ToList();
+                
+            }
+            ViewBag.data = phoneList;
+            return View(brand);
+        }
+
+
+
+
         [HttpPost]
         public async Task<IActionResult> Detail(int? id,int Score, string Comment,int PhoneId, int UserId)
         {
@@ -79,8 +103,8 @@ return View(phone);
 
             }
 
-            phoneDetailTotalPeople = phoneDetailTotalPeople + 1;
-            phoneDetailTotalScore = phoneDetailTotalScore + _score;
+            phoneDetailTotalPeople += 1;
+            phoneDetailTotalScore += _score;
             score = phoneDetailTotalScore / phoneDetailTotalPeople;
 
             

@@ -9,7 +9,7 @@
     <div class="list-group">
         @foreach (var person in ViewBag.data)
         {
-            <a href="#" class="list-group-item">@person.BrandName</a>
+            <a asp-action="Products" asp-route-id="@person.BrandId" class="list-group-item">@person.BrandName</a>
         }
     </div>
 </div>
