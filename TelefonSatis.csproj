@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Admin\" />
+    <Folder Include="Views\AdminPanel\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

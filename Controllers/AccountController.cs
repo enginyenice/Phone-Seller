@@ -60,9 +60,6 @@ namespace TelefonSatis.Controllers
 
                 return View("Login");
             }
-
-            
-            return View("Login");
         }
 
 
