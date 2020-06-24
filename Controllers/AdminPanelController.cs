@@ -8,7 +8,7 @@ namespace TelefonSatis.Controllers
 {
     public class AdminPanelController : Controller
     {
-        public IActionResult Index()
+        public IActionResult UserManagment()
         {
             return View();
         }
