@@ -12,5 +12,18 @@ namespace TelefonSatis.Controllers
         {
             return View();
         }
+        public IActionResult PhoneManagment()
+        {
+            return View();
+        }
+        public IActionResult BrandManagment()
+        {
+            return View();
+        }
+        public IActionResult CommentManagment()
+        {
+            return View();
+        }
+   
     }
 }
