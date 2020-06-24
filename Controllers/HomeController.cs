@@ -61,9 +61,6 @@ namespace TelefonSatis.Controllers
 return View(phone);
 }
 
-
-
-
         public async Task<IActionResult> Products(int? id = 0)
         {
 
@@ -83,8 +80,6 @@ return View(phone);
         }
 
 
-
-
         [HttpPost]
         public async Task<IActionResult> Detail(int? id,int Score, string Comment,int PhoneId, int UserId)
         {
@@ -98,21 +93,21 @@ return View(phone);
             int score = 0;
             foreach (var item in phoneDetail)
             {
-                phoneDetailTotalPeople = Int32.Parse(item.TotalPeople);
-                phoneDetailTotalScore = Int32.Parse(item.TotalScore);
+                phoneDetailTotalPeople = item.TotalPeople;
+                phoneDetailTotalScore = item.TotalScore;
 
             }
 
-            phoneDetailTotalPeople += 1;
-            phoneDetailTotalScore += _score;
+            phoneDetailTotalPeople = phoneDetailTotalPeople +  1;
+            phoneDetailTotalScore = phoneDetailTotalScore + _score;
             score = phoneDetailTotalScore / phoneDetailTotalPeople;
 
             
-            Phone phoneCommentEdit = _context.Phones.SingleOrDefault(k => k.PhoneId == _userId);
+            Phone phoneCommentEdit = _context.Phones.SingleOrDefault(k => k.PhoneId == _phoneId);
             
-            phoneCommentEdit.TotalPeople = phoneDetailTotalPeople.ToString();
-            phoneCommentEdit.TotalScore = phoneDetailTotalScore.ToString();
-            phoneCommentEdit.Score =  score.ToString();
+            phoneCommentEdit.TotalPeople = phoneDetailTotalPeople;
+            phoneCommentEdit.TotalScore = phoneDetailTotalScore;
+            phoneCommentEdit.Score =  score;
             _context.SaveChanges();
 
             Comment com = new Comment

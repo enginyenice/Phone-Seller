@@ -17,9 +17,9 @@ namespace TelefonSatis.Models
         public string MinDesc { get; set; }
         public string Images { get; set; }
         public string Description { get; set; }
-        public string TotalScore { get; set; }
-        public string TotalPeople { get; set; }
-        public string Score { get; set; }
+        public int TotalScore { get; set; }
+        public int TotalPeople { get; set; }
+        public int Score { get; set; }
         
         public int BrandId { get; set; }
         public virtual Brand brand { get; set; }
