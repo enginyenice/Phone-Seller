@@ -61,8 +61,24 @@ namespace TelefonSatis.Controllers
 return View(phone);
 }
 
+        public async Task<IActionResult> Cart()
+        {
+            var cartData = HttpContext.Session.GetString("CartData");
+            if(cartData != null)
+            {
+                List<Phone> phoneList = new List<Phone>();
+                string[] parcala = cartData.Split(",");
+                
+                for(int i = 0; i< parcala.Length -1; i++)
+                {
+                    var data = _context.Phones.Where(p => p.PhoneId == Int32.Parse(parcala[i])).SingleOrDefault();
+                    phoneList.Add(data);
+                }
 
-
+                ViewBag.data = phoneList;
+            }
+            return View();
+        }
 
 
         public async Task<IActionResult> Products(int? id = 0,string search="")
@@ -92,11 +108,50 @@ return View(phone);
             return View(brand);
         }
 
-
-
-
-
         [HttpPost]
+        public async Task<IActionResult> CartItemDelete(int PhoneId)
+        {
+
+
+            var cartData = HttpContext.Session.GetString("CartData");
+            if (cartData != null)
+            {
+                string data = "";
+                List<Phone> phoneList = new List<Phone>();
+                string[] parcala = cartData.Split(",");
+                int index = -1;
+                if(parcala.Length > 1)
+                {
+                    for (int i = 0; i < parcala.Length - 1; i++)
+                    {
+                        if (Int32.Parse(parcala[i]) == PhoneId)
+                        {
+                            index = i;
+                        }
+                    }
+                    parcala = parcala.Where(val => val != PhoneId.ToString()).ToArray();
+
+                    
+                    for (int i = 0; i < parcala.Length - 1; i++)
+                    {
+                        data += parcala[i] + ",";
+                    }
+                } else
+                {
+                    data = null; 
+                }
+                HttpContext.Session.SetString("CartData", data);
+            }
+
+
+
+                return RedirectToAction("Cart", "Home");
+        }
+
+
+
+
+            [HttpPost]
         public async Task<IActionResult> DetailCartAdd(int? id,  int PhoneId)
         {
 
