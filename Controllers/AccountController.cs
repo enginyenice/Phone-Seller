@@ -90,9 +90,8 @@ namespace TelefonSatis.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
         #endregion
-
-
-
+        #region register
+        
         // GET: Users/Create
         public IActionResult Register()
         {
@@ -136,7 +135,41 @@ namespace TelefonSatis.Controllers
             }
             return View();
         }
+        #endregion
+        #region profile
+        public async Task<IActionResult> Profile()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditMail(string Mail, int userId)
+        {
+            if (ModelState.IsValid)
+            {
+                int mailCount = _context.Users.Where(u => u.Mail == Mail).Count();
+                if (mailCount > 0)
+                {
+                    TempData["Uyari"] = "Mail Dedected...";
+                    return RedirectToAction("Profile");
+                }
+                else
+                {
+
+                    User userMailEdit = _context.Users.SingleOrDefault(k => k.UserId == userId);
+
+                    userMailEdit.Mail = Mail;
+                    _context.SaveChanges();
+                    HttpContext.Session.SetString("Mail", Mail);
+                    return RedirectToAction("Profile");
+                }
+
+            }
+            return RedirectToAction("Profile");
+        }
 
 
+        #endregion
     }
 }
