@@ -51,7 +51,9 @@ namespace TelefonSatis.Controllers
             var phone = _context.Phones
                             .Include(m => m.brand)
                             .Include(m => m.comments)
+                            .ThenInclude(it => it.User)
                             .First(m => m.PhoneId == id);
+                            
                             
             if (phone == null)
             {

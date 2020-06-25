@@ -126,7 +126,7 @@
             @foreach (var item in Model.comments)
             {
                 <p>@item.UserComment</p>
-                <small class="text-muted">Posted by Anonymous</small>
+                <small class="text-muted">Posted by @item.User.UserName </small>
                 <hr />
             }
             @{
