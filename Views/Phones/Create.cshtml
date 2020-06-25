@@ -5,73 +5,71 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Kullanıcı Yönetimi</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item">Yönetim Paneli</li>
+            <li class="breadcrumb-item active">Telefon Ekle</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Telefon Kayıtları
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <h2>Telefon Ekle</h2>
 
-<h4>Phone</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form asp-action="Create">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="Name" class="control-label">Telefon Adı</label>
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Color" class="control-label">Telefon Rengi</label>
+                                    <input asp-for="Color" class="form-control" />
+                                    <span asp-validation-for="Color" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Price" class="control-label">Telefon Fiyatı</label>
+                                    <input asp-for="Price" class="form-control" />
+                                    <span asp-validation-for="Price" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="MinDesc" class="control-label">Telefon Kısa Açıklaması</label>
+                                    <input asp-for="MinDesc" class="form-control" />
+                                    <span asp-validation-for="MinDesc" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Description" class="control-label">Telefon Uzun Açıklaması</label>
+                                    <input asp-for="Description" class="form-control" />
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="BrandId" class="control-label"></label>
+                                    <select asp-for="BrandId" class="form-control" asp-items="ViewBag.BrandId"></select>
+                                    <span asp-validation-for="BrandId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Ekle" class="btn btn-dark" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Color" class="control-label"></label>
-                <input asp-for="Color" class="form-control" />
-                <span asp-validation-for="Color" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MinDesc" class="control-label"></label>
-                <input asp-for="MinDesc" class="form-control" />
-                <span asp-validation-for="MinDesc" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Images" class="control-label"></label>
-                <input asp-for="Images" class="form-control" />
-                <span asp-validation-for="Images" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TotalScore" class="control-label"></label>
-                <input asp-for="TotalScore" class="form-control" />
-                <span asp-validation-for="TotalScore" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TotalPeople" class="control-label"></label>
-                <input asp-for="TotalPeople" class="form-control" />
-                <span asp-validation-for="TotalPeople" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Score" class="control-label"></label>
-                <input asp-for="Score" class="form-control" />
-                <span asp-validation-for="Score" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BrandId" class="control-label"></label>
-                <select asp-for="BrandId" class ="form-control" asp-items="ViewBag.BrandId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+</main>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

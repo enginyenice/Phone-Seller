@@ -1,33 +1,49 @@
 ﻿@model TelefonSatis.Models.Brand
 
 @{
+    Layout = "~/Views/AdminPanel/_AdminLayout.cshtml";
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Marka Yönetimi</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item">Yönetim Paneli</li>
+            <li class="breadcrumb-item active">Marka Düzenle</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Marka Kayıtları
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <h2>Marka Düzenle</h2>
 
-<h4>Brand</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="BrandName" class="control-label"></label>
-                <input asp-for="BrandName" class="form-control" />
-                <span asp-validation-for="BrandName" class="text-danger"></span>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form asp-action="Create">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="BrandName" class="control-label">Marka Adı</label>
+                                    <input asp-for="BrandName" class="form-control" />
+                                    <span asp-validation-for="BrandName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Kaydet" class="btn btn-dark" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+</main>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

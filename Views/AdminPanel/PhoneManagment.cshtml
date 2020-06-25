@@ -11,11 +11,19 @@
                 <li class="breadcrumb-item">Yönetim Paneli</li>
                 <li class="breadcrumb-item active">Telefon Yönetimi</li>
             </ol>
+
+
             <div class="card mb-4">
                 <div class="card-header">
-                    <i class="fas fa-table mr-1"></i>
-                    Telefon Kayıtları
+                    <div class="row d-flex justify-content-between">
+                        <div class="ml-2">
+                            <i class="fas fa-table mr-1"></i>
+                            Telefon Kayıtları
+                        </div>
+                        @Html.ActionLink("Telefon Ekle", "Create", "Phones",null, new { @class = "btn btn-sm btn-outline-primary mr-2" })                     
+                    </div>
                 </div>
+
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -45,7 +53,7 @@
                                             <td>@Html.DisplayFor(i => item.brand.BrandName)</td>
                                             <td>@Html.DisplayFor(i => item.Price)</td>
                                             <td>
-                                                @Html.ActionLink("Resim", "Image", "Phones", new { id = item.PhoneId }, new { @class = "btn btn-dark"})
+                                                @Html.ActionLink("Resim", "Image", "Phones", new { id = item.PhoneId }, new { @class = "btn btn-dark" })
                                                 @Html.ActionLink("Düzenle", "Edit", "Phones", new { id = item.PhoneId }, new { @class = "btn btn-dark" })
                                                 @Html.ActionLink("Detay", "Detail", "Home", new { id = item.PhoneId }, new { @class = "btn btn-dark" })
                                                 @Html.ActionLink("Sil", "Delete", "Phones", new { id = item.PhoneId }, new { @class = "btn btn-dark" })
@@ -60,7 +68,7 @@
                 </div>
             </div>
         </div>
-    </main>
+</main>
     <footer class="py-4 bg-light mt-auto">
         <div class="container-fluid">
             <div class="d-flex align-items-center justify-content-between small">

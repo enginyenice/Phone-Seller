@@ -63,7 +63,7 @@ namespace TelefonSatis.Controllers
             {
                 _context.Add(phone);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("PhoneManagment", "AdminPanel");
             }
             ViewData["BrandId"] = new SelectList(_context.Brands, "BrandId", "BrandId", phone.BrandId);
             return View(phone);

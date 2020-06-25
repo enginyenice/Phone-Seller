@@ -38,7 +38,6 @@
                                             <td>@Html.DisplayFor(i => item.UserComment)</td>
                                             <td>
                                                 @Html.ActionLink("Düzenle", "Edit","Comments", new { id = item.CommentId }, new { @class = "btn btn-dark" })
-                                                @Html.ActionLink("Detay", "Details", "Comments", new { id = item.CommentId }, new { @class = "btn btn-dark" })
                                                 @Html.ActionLink("Sil", "Delete", "Comments", new { id = item.CommentId }, new { @class = "btn btn-dark" })
                                             </td>
                                         </tr>

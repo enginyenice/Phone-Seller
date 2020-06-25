@@ -60,7 +60,7 @@ namespace TelefonSatis.Controllers
             {
                 _context.Add(brand);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("BrandManagment", "AdminPanel");
             }
             return View(brand);
         }

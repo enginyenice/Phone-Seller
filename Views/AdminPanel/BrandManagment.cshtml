@@ -11,7 +11,7 @@
                 <li class="breadcrumb-item">Yönetim Paneli</li>
                 <li class="breadcrumb-item active">Marka Yönetimi</li>
             </ol>
-            <!--Buradan-->
+
             <div class="card mb-4">
                 <div class="card-header">
                     <div class="row d-flex justify-content-between">
@@ -19,10 +19,10 @@
                             <i class="fas fa-table mr-1"></i>
                             Marka Kayıtları
                         </div>
-                        <a href="#" class="btn btn-sm btn-outline-primary mr-2">Button</a>
+                        @Html.ActionLink("Marka Ekle", "Create", "Brands", null, new { @class = "btn btn-sm btn-outline-primary mr-2" })
                     </div>
                 </div>
-                <!--Buraya-->
+          
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -42,7 +42,6 @@
                                             <td>@Html.DisplayFor(i => item.BrandName)</td>
                                             <td>
                                                 @Html.ActionLink("Düzenle", "Edit", "Brands", new { id = item.BrandId }, new { @class = "btn btn-dark" })
-                                                @Html.ActionLink("Detay", "Details", "Brands", new { id = item.BrandId }, new { @class = "btn btn-dark" })
                                                 @Html.ActionLink("Sil", "Delete", "Brands", new { id = item.BrandId }, new { @class = "btn btn-dark" })
                                             </td>
                                         </tr>

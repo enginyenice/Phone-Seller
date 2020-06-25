@@ -40,7 +40,6 @@
                                         <td>@Html.DisplayFor(modelItem => item.Permission)</td>
                                         <td>
                                             @Html.ActionLink("Düzenle", "Edit","Users", new { id = item.UserId }, new { @class = "btn btn-dark" })
-                                            @Html.ActionLink("Detay", "Details", "Users", new { id = item.UserId }, new { @class = "btn btn-dark" })
                                             @Html.ActionLink("Sil", "Delete", "Users", new { id = item.UserId }, new { @class = "btn btn-dark" })
                                         </td>
                                     </tr>
