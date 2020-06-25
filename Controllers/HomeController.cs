@@ -60,8 +60,9 @@ namespace TelefonSatis.Controllers
                 return NotFound();
             }
 
-return View(phone);
-}
+            return View(phone);
+            //return RedirectToAction("Cart", "Home");
+        }
 
         public async Task<IActionResult> Cart()
         {
@@ -233,6 +234,7 @@ return View(phone);
             var phone = _context.Phones
                             .Include(m => m.brand)
                             .Include(m => m.comments)
+                            .ThenInclude(it => it.User)
                             .First(m => m.PhoneId == id);
 
             if (phone == null)
