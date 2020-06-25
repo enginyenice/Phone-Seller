@@ -21,18 +21,18 @@
 
     <div class="card mt-4">
 
+        <div class="text-center">
+            @if (Model.Images == "" || Model.Images == null)
+            {
+                <img style="max-height:500px; max-width:500px;" class="card-img-top img-fluid" src="~/images/resim-yok.png" alt="Alternate Text" />
 
-        @if (Model.Images == "" || Model.Images == null)
-        {
-            <img style="max-height:500px;"  class="card-img-top img-fluid" src="~/images/resim-yok.png" alt="Alternate Text" />
+            }
+            else
+            {
+                <img style="max-height:500px; max-width:500px;" class=" card-img-top img-fluid" src="~/images/@Html.DisplayFor(i => Model.Images)" alt="Alternate Text" />
+            }
 
-        }
-        else
-        {
-            <img style="max-height:500px;" class="card-img-top img-fluid" src="~/images/@Html.DisplayFor(i => Model.Images)" alt="Alternate Text" />
-        }
-
-
+        </div>
 
         <div class="card-body">
             <h3 class="card-title">@Model.brand.BrandName - @Model.Name</h3>
