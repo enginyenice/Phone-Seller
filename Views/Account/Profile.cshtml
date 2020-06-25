@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TelefonSatis.Models.User>
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
+@{
+    ViewData["Title"] = "Profile";
+}
+    <div class="container-fluid my-2">
+        @if (TempData["Uyari"] != null)
+        {
+            <div class="alert alert-warning" role="alert">
+                <strong>@TempData["Uyari"]</strong>
+            </div>
+        }
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">E-Mail Edit</h5>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm("EditMail", "Account", FormMethod.Post, new { }))
+                        {
+                            <div class="form-group">
+                                <label>E-Mail: </label>
+                                @{
+                                    string mail = Context.Session.GetString("Mail");
+                                    string userIdText = Context.Session.GetString("userId");
+                                    int userId = Int32.Parse(userIdText);
+                                }
+                                <label>@mail</label>
+                                <input id="Hidden1" value="@userId" name="userId" type="hidden" />
+                            </div>
+                            <div class="form-group">
+                                <label>New E-Mail</label>
+                                @Html.TextBox("Mail", null, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Gönder</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Password Edit</h5>
+                    </div>
+                    <div class="card-body">
+                        12312
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

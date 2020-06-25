@@ -83,7 +83,6 @@ return View(phone);
             return View();
         }
 
-
         public async Task<IActionResult> Products(int? id = 0,string search="")
         {
             var brand = _context.Brands
