@@ -170,6 +170,24 @@ namespace TelefonSatis.Controllers
         }
 
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditPassword(string Password, int userId)
+        {
+            if (ModelState.IsValid)
+            {
+
+
+                    User userPasswordEdit = _context.Users.SingleOrDefault(k => k.UserId == userId);
+
+                    userPasswordEdit.Password = Password;
+                    _context.SaveChanges();
+                }
+            return RedirectToAction("Profile");
+        }
+
+
         #endregion
     }
 }

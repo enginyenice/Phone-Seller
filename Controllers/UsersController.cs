@@ -122,16 +122,13 @@ namespace TelefonSatis.Controllers
             if (id == null)
             {
                 return NotFound();
-            }
-
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (user == null)
+            } else
             {
-                return NotFound();
+                var deleteUser = await _context.Users.FindAsync(id);
+                _context.Users.Remove(deleteUser);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("UserManagment", "AdminPanel");
             }
-
-            return View(user);
         }
 
         // POST: Users/Delete/5

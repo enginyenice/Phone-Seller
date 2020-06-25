@@ -122,16 +122,16 @@ namespace TelefonSatis.Controllers
             if (id == null)
             {
                 return NotFound();
-            }
-
-            var comment = await _context.Comments
-                .FirstOrDefaultAsync(m => m.CommentId == id);
-            if (comment == null)
+            } else
             {
-                return NotFound();
+                var comment = await _context.Comments.FindAsync(id);
+                _context.Comments.Remove(comment);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("CommentManagment", "AdminPanel");
             }
 
-            return View(comment);
+            
+
         }
 
         // POST: Comments/Delete/5

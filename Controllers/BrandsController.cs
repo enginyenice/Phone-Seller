@@ -123,15 +123,13 @@ namespace TelefonSatis.Controllers
             {
                 return NotFound();
             }
-
-            var brand = await _context.Brands
-                .FirstOrDefaultAsync(m => m.BrandId == id);
-            if (brand == null)
+            else
             {
-                return NotFound();
+                var brand = await _context.Brands.FindAsync(id);
+                _context.Brands.Remove(brand);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("BrandManagment", "AdminPanel");
             }
-
-            return View(brand);
         }
 
         // POST: Brands/Delete/5
@@ -142,7 +140,7 @@ namespace TelefonSatis.Controllers
             var brand = await _context.Brands.FindAsync(id);
             _context.Brands.Remove(brand);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("BrandManagment", "AdminPanel");
         }
 
         private bool BrandExists(int id)

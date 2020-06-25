@@ -128,17 +128,13 @@ namespace TelefonSatis.Controllers
             if (id == null)
             {
                 return NotFound();
-            }
-
-            var phone = await _context.Phones
-                .Include(p => p.brand)
-                .FirstOrDefaultAsync(m => m.PhoneId == id);
-            if (phone == null)
+            } else
             {
-                return NotFound();
+                var phone = await _context.Phones.FindAsync(id);
+                _context.Phones.Remove(phone);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("UserManagment", "AdminPanel");
             }
-
-            return View(phone);
         }
 
         // POST: Phones/Delete/5
