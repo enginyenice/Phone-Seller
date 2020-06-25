@@ -78,6 +78,7 @@ namespace TelefonSatis.Controllers
             {
                 return NotFound();
             }
+            ViewData["PhoneId"] = new SelectList(_context.Phones, "PhoneId", "PhoneId", comment.PhoneId);
             return View(comment);
         }
 
