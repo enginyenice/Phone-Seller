@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,12 +15,13 @@ namespace TelefonSatis.Controllers
     public class PhonesController : Controller
     {
         private readonly DataBaseContex _context;
-
-        public PhonesController(DataBaseContex context)
+        private readonly IHostingEnvironment _evrimoment;
+        public PhonesController(DataBaseContex context, IHostingEnvironment evrimoment)
         {
             _context = context;
+            _evrimoment = evrimoment;
         }
-
+        #region default
         // GET: Phones
         public async Task<IActionResult> Index()
         {
@@ -152,7 +155,7 @@ namespace TelefonSatis.Controllers
         {
             return _context.Phones.Any(e => e.PhoneId == id);
         }
-
+        #endregion
 
 
 
@@ -179,18 +182,25 @@ namespace TelefonSatis.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Image(int id, [Bind("PhoneId,Name,Color,Price,MinDesc,Description,TotalScore,TotalPeople,Score,BrandId")] Phone phone)
+        public async Task<IActionResult> Image([Bind("PhoneId","ResimDosyasi")] Phone phone)
         {
-            if (id != phone.PhoneId)
-            {
-                return NotFound();
-            }
+            
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(phone);
+                    string resimler = Path.Combine(_evrimoment.WebRootPath, "images");
+                    if (phone.ResimDosyasi.Length > 0)
+                    {
+                        using (var fileStream = new FileStream(Path.Combine(resimler, phone.ResimDosyasi.FileName), FileMode.Create))
+                        {
+                            await phone.ResimDosyasi.CopyToAsync(fileStream);
+                        }
+                    }
+                    var data = _context.Phones.Where(p => p.PhoneId == phone.PhoneId).SingleOrDefault();
+                    data.Images = phone.ResimDosyasi.FileName;
+                    _context.Update(data);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -207,7 +217,7 @@ namespace TelefonSatis.Controllers
                 return RedirectToAction("PhoneManagment", "AdminPanel");
             }
             ViewData["BrandId"] = new SelectList(_context.Brands, "BrandId", "BrandId", phone.BrandId);
-            return View(phone);
+            return RedirectToAction("PhoneManagment", "AdminPanel");
         }
 
         #endregion
