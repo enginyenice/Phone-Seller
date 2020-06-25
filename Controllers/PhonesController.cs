@@ -116,7 +116,7 @@ namespace TelefonSatis.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("UserManagment", "AdminPanel");
             }
             ViewData["BrandId"] = new SelectList(_context.Brands, "BrandId", "BrandId", phone.BrandId);
             return View(phone);
@@ -149,7 +149,7 @@ namespace TelefonSatis.Controllers
             var phone = await _context.Phones.FindAsync(id);
             _context.Phones.Remove(phone);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("UserManagment", "AdminPanel");
         }
 
         private bool PhoneExists(int id)
