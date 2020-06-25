@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TelefonSatis.Data;
 using TelefonSatis.Models;
-
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 namespace TelefonSatis.Controllers
 {
     public class BrandsController : Controller
@@ -17,6 +18,25 @@ namespace TelefonSatis.Controllers
         public BrandsController(DataBaseContex context)
         {
             _context = context;
+        }
+
+
+        public bool SessionCont()
+        {
+            string permission = "";
+
+            if (HttpContext != null)
+            {
+                if ((HttpContext.Session.GetString("Permission")) != null)
+                {
+                    permission = HttpContext.Session.GetString("Permission");
+                    if (permission == "Admin")
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false; ;
         }
 
         // GET: Brands
@@ -46,6 +66,11 @@ namespace TelefonSatis.Controllers
         // GET: Brands/Create
         public IActionResult Create()
         {
+            bool session = SessionCont();
+            if (session == false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -56,6 +81,12 @@ namespace TelefonSatis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BrandId,BrandName")] Brand brand)
         {
+            bool session = SessionCont();
+            if (session == false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(brand);
@@ -68,6 +99,11 @@ namespace TelefonSatis.Controllers
         // GET: Brands/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            bool session = SessionCont();
+            if (session == false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -88,6 +124,11 @@ namespace TelefonSatis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BrandId,BrandName")] Brand brand)
         {
+            bool session = SessionCont();
+            if (session == false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id != brand.BrandId)
             {
                 return NotFound();
@@ -119,6 +160,11 @@ namespace TelefonSatis.Controllers
         // GET: Brands/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            bool session = SessionCont();
+            if (session == false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -137,6 +183,11 @@ namespace TelefonSatis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            bool session = SessionCont();
+            if (session == false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var brand = await _context.Brands.FindAsync(id);
             _context.Brands.Remove(brand);
             await _context.SaveChangesAsync();

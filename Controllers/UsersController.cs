@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TelefonSatis.Data;
 using TelefonSatis.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace TelefonSatis.Controllers
 {
@@ -17,6 +19,24 @@ namespace TelefonSatis.Controllers
         public UsersController(DataBaseContex context)
         {
             _context = context;
+        }
+
+        public bool SessionCont()
+        {
+            string permission = "";
+
+            if (HttpContext != null)
+            {
+                if ((HttpContext.Session.GetString("Permission")) != null)
+                {
+                    permission = HttpContext.Session.GetString("Permission");
+                    if (permission == "Admin")
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         // GET: Users
@@ -46,6 +66,11 @@ namespace TelefonSatis.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
+            bool session = SessionCont();
+            if (session == false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -56,6 +81,11 @@ namespace TelefonSatis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,UserName,Password,Mail,Permission")] User user)
         {
+            bool session = SessionCont();
+            if (session == false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(user);
@@ -68,6 +98,11 @@ namespace TelefonSatis.Controllers
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            bool session = SessionCont();
+            if (session == false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -86,8 +121,13 @@ namespace TelefonSatis.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserName,Password,Mail,Permission")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,UserName,Password,Mail,Permission")] User user)
         {
+            bool session = SessionCont();
+            if (session == false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id != user.UserId)
             {
                 return NotFound();
@@ -119,6 +159,11 @@ namespace TelefonSatis.Controllers
         // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            bool session = SessionCont();
+            if (session == false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -136,6 +181,11 @@ namespace TelefonSatis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            bool session = SessionCont();
+            if (session == false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var user = await _context.Users.FindAsync(id);
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
