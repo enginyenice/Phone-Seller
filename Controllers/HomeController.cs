@@ -64,7 +64,7 @@ return View(phone);
         public async Task<IActionResult> Cart()
         {
             var cartData = HttpContext.Session.GetString("CartData");
-            if(cartData != null)
+            if(cartData != null && cartData != "")
             {
                 List<Phone> phoneList = new List<Phone>();
                 string[] parcala = cartData.Split(",");
@@ -76,6 +76,9 @@ return View(phone);
                 }
 
                 ViewBag.data = phoneList;
+            } else
+            {
+                ViewBag.data = null;
             }
             return View();
         }
@@ -136,11 +139,14 @@ return View(phone);
                     {
                         data += parcala[i] + ",";
                     }
+                    HttpContext.Session.SetString("CartData", data);
                 } else
                 {
-                    data = null; 
+                    data = null;
+                    HttpContext.Session.SetString("CartData", null);
+                    HttpContext.Session.Remove("CartData");
                 }
-                HttpContext.Session.SetString("CartData", data);
+                
             }
 
 
@@ -148,10 +154,20 @@ return View(phone);
                 return RedirectToAction("Cart", "Home");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CartBuy()
+        {
+            
+            HttpContext.Session.Remove("CartData");
+            TempData["Buy"] = "Ürünler satın alındı..";
+
+
+            return RedirectToAction("Cart", "Home");
+        }
 
 
 
-            [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> DetailCartAdd(int? id,  int PhoneId)
         {
 

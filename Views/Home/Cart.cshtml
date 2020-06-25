@@ -6,47 +6,70 @@
     ViewData["Title"] = "Cart";
 }
 
-<div class="col-lg-12">
+    <div class="col-lg-12">
+        @if (TempData["Buy"] != null)
+        {
+            <div class="mt-2 alert alert-warning" role="alert">
+                <strong>@TempData["Buy"]</strong>
+            </div>
+        }
 
-    <div class="card mt-4 mb-4">
-        <div class="card-body">
-            <h3 class="card-title">Sepetim</h3>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Resim</th>
-                        <th>Ürün Adı</th>
-                        <th>Ürün Rengi</th>
-                        <th>Açıklama</th>
-                        <th>Adet</th>
-                        <th>Fiyat</th>
-                        <th><i class="far fa-eye-slash"></i></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if(ViewBag.data != null) { 
-                    @foreach (var item in ViewBag.data)
-                    { 
-                    <tr>
-                        <td>#</td>
-                        <td>@item.Name</td>
-                        <td>@item.Color</td>
-                        <td>@item.MinDesc</td>
-                        <td>1</td>
-                        <td>@item.Price ₺</td>
-                        <td>
-                            @using (Html.BeginForm("CartItemDelete", "Home", FormMethod.Post, new { }))
+
+        <div class="card mt-4 mb-4">
+            <div class="card-body">
+                <h3 class="card-title">Sepetim</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Resim</th>
+                            <th>Ürün Adı</th>
+                            <th>Ürün Rengi</th>
+                            <th>Açıklama</th>
+                            <th>Adet</th>
+                            <th>Fiyat</th>
+                            <th><i class="far fa-eye-slash"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.data != null)
+                        {
+                            @foreach (var item in ViewBag.data)
                             {
-                                <input id="PhoneId" name="PhoneId" value="@item.PhoneId" type="hidden" />
-                                <button class="btn btn-primary"><i class="far fa-eye-slash"></i></button>
+                                <tr>
+                                    <td>#</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Color</td>
+                                    <td>@item.MinDesc</td>
+                                    <td>1</td>
+                                    <td>@item.Price ₺</td>
+                                    <td>
+                                        @using (Html.BeginForm("CartItemDelete", "Home", FormMethod.Post, new { }))
+                                        {
+                                            <input id="PhoneId" name="PhoneId" value="@item.PhoneId" type="hidden" />
+                                            <button class="btn btn-primary"><i class="far fa-eye-slash"></i></button>
+                                        }
+                                    </td>
+                                </tr>
                             }
-                            </td>
-                    </tr>
-                    }
-                    }
-                        
+                        }
+
                     </tbody>
-            </table>
+                </table>
+            </div>
+            <div class="card-footer">
+                @{
+                    if (ViewBag.data != null)
+                    {
+                        @using (Html.BeginForm("CartBuy", "Home", FormMethod.Post, new { }))
+                        {
+                            <button class="btn btn-primary"><i class="fas fa-money-bill-wave"></i> Satın Al</button>
+                        }
+                    }
+                    else
+                    {
+                        <span>Sepet boş</span>
+                    }
+                }
+            </div>
         </div>
     </div>
-</div>
