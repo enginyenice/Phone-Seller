@@ -36,7 +36,17 @@
                                 @{ foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>@Html.DisplayFor(i => item.Images)</td>
+                                                                            <td>
+                                                                                @if (item.Images == "" || item.Images == null)
+                                                                                {
+                                                                                    <img width="100" height="100" src="~/images/resim-yok.png" alt="Alternate Text" />
+
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <img width="100" height="100" src="~/images/@Html.DisplayFor(i => item.Images)" alt="Alternate Text" />
+                                                                                }
+                                                                            </td>
                                             <td>@Html.DisplayFor(i => item.PhoneId)</td>
                                             <td>@Html.DisplayFor(i => item.Name)</td>
                                             <td>@Html.DisplayFor(i => item.Color)</td>

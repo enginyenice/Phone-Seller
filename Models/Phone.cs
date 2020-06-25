@@ -24,5 +24,8 @@ namespace TelefonSatis.Models
         public int BrandId { get; set; }
         public virtual Brand brand { get; set; }
         public virtual List<Comment> comments { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public Microsoft.AspNetCore.Http.IFormFile ResimDosyasi { get; set; }
     }
 }
