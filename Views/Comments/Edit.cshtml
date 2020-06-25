@@ -1,42 +1,73 @@
 ﻿@model TelefonSatis.Models.Comment
 
 @{
+    Layout = "~/Views/AdminPanel/_AdminLayout.cshtml";
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">Kullanıcı Yönetimi</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item">Yönetim Paneli</li>
+                <li class="breadcrumb-item active">Yorum Düzenle</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-body">
+                    @{
 
-<h4>Comment</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CommentId" />
-            <div class="form-group">
-                <label asp-for="PhoneId" class="control-label"></label>
-                <select asp-for="PhoneId" class="form-control" asp-items="ViewBag.PhoneId"></select>
-                <span asp-validation-for="PhoneId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserComment" class="control-label"></label>
-                <input asp-for="UserComment" class="form-control" />
-                <span asp-validation-for="UserComment" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
-</div>
+                        for (int i = 0; i < 180; i++)
+                        {
+                            <span>&nbsp;</span>
+                        }
+                    }
 
-<div>
-    <a asp-action="Index">Back to List</a>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Yorum Kayıtları
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <h2>Yorum Düzenle</h2>
+
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form asp-action="Edit">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="CommentId" />
+                                    <div class="form-group">
+                                        <label asp-for="PhoneId" class="control-label">Telefon ID</label>
+                                        <select asp-for="PhoneId" class="form-control" asp-items="ViewBag.PhoneId"></select>
+                                        <span asp-validation-for="PhoneId" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="UserId" class="control-label">Kullanıcı ID</label>
+                                        <input asp-for="UserId" class="form-control" />
+                                        <span asp-validation-for="UserId" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="UserComment" class="control-label">Yorum</label>
+                                        <input asp-for="UserComment" class="form-control" />
+                                        <span asp-validation-for="UserComment" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Kaydet" class="btn btn-dark" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
 
 @section Scripts {

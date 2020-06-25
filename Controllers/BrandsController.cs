@@ -111,7 +111,7 @@ namespace TelefonSatis.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("UserManagment", "AdminPanel");
             }
             return View(brand);
         }
