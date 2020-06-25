@@ -74,7 +74,17 @@
         {
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="https://picsum.photos/700/400" alt=""></a>
+                    <a href="#">
+                        @if (item.Images == "" || item.Images == null)
+                        {
+                            <img class="card-img-top" src="~/images/resim-yok.png" alt="Alternate Text" />
+
+                        }
+                        else
+                        {
+                            <img class="card-img-top" src="~/images/@item.Images" alt="Alternate Text" />
+                        }
+                    </a>
                     <div class="card-body">
                         <h4 class="card-title">
                             <a asp-action="Detail" asp-route-id="@item.PhoneId">@item.brand.BrandName - @item.Name</a>
