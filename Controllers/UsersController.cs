@@ -146,5 +146,26 @@ namespace TelefonSatis.Controllers
         {
             return _context.Users.Any(e => e.UserId == id);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
+
 }
+
+

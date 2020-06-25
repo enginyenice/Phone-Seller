@@ -49,6 +49,10 @@
                                 Anasayfa
                             </a>
                         </li>
+
+
+
+
                         <li class="nav-item
                             @if (selectLink == "Products") {
                                 @active
@@ -57,28 +61,45 @@
 
                             ">
                             <a class="nav-link" href="@Url.Action("Products", "Home")">Tüm Telefonlar</a>
-                        </li>                  
+                        </li>
+
+
+
+                        <li class="nav-item
+                            @if (selectLink == "Forum") {
+                                @active
+                        }
+
+
+                            ">
+                            <a class="nav-link" href="#">Forum</a>
+                        </li>
+
+
+
                         @{
 
                             string userName = Context.Session.GetString("userName");
                             string permission = Context.Session.GetString("Permission");
                             if (userName != null)
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Profile", "Account")">@userName - Hesap Ayarlarım</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                         <i class="fas fa-user-cog"></i> Hesap
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        @if (permission == "Admin")
+                                        {
+                                            <a class="dropdown-item" href="@Url.Action("UserManagment", "AdminPanel")">Yonetim Paneli</a>
+                                        }
+                                        <a class="dropdown-item" href="@Url.Action("Profile", "Account")">Hesabim</a>
+                                        <a class="dropdown-item" href="@Url.Action("Cart", "Home")">Sepetim</a>
+                                        <div class="dropdown-divider"></div>
+
+                                        <a class="dropdown-item" href="@Url.Action("Logout", "Account")">Çıkış Yap</a>
+                                    </div>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Cart", "Home")">Sepetim</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Logout", "Account")">Çıkış Yap</a>
-                                </li>
-                                if (permission == "Admin")
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="@Url.Action("UserManagment", "AdminPanel")">Yonetim Paneli</a>
-                                    </li>
-                                }
+
                             }
                             else
                             {

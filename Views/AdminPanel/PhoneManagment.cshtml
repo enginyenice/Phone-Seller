@@ -4,7 +4,6 @@
     ViewData["Title"] = "PhoneManagment";
 }
 
-<div id="layoutSidenav_content">
     <main>
         <div class="container-fluid">
             <h1 class="mt-4">Telefon Yönetimi</h1>
@@ -12,17 +11,6 @@
                 <li class="breadcrumb-item">Yönetim Paneli</li>
                 <li class="breadcrumb-item active">Telefon Yönetimi</li>
             </ol>
-            <div class="card mb-4">
-                <div class="card-body">
-                    @{
-
-                        for (int i = 0; i < 180; i++)
-                        {
-                            <span>&nbsp;</span>
-                        }
-                    }
-                </div>
-            </div>
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table mr-1"></i>
@@ -57,10 +45,10 @@
                                             <td>@Html.DisplayFor(i => item.brand.BrandName)</td>
                                             <td>@Html.DisplayFor(i => item.Price)</td>
                                             <td>
-                                      
-                                                @Html.ActionLink("Düzenle", "Edit", "Phones", new { id = item.PhoneId }, new { @class = "btn btn-dark"})
-                                                @Html.ActionLink("Detay", "Details", "Phones", new { id = item.PhoneId}, new { @class = "btn btn-dark" })
-                                                @Html.ActionLink("Sil", "Delete", "Phones", new { id = item.PhoneId}, new { @class = "btn btn-dark" })
+                                                @Html.ActionLink("Resim", "Image", "Phones", new { id = item.PhoneId }, new { @class = "btn btn-dark"})
+                                                @Html.ActionLink("Düzenle", "Edit", "Phones", new { id = item.PhoneId }, new { @class = "btn btn-dark" })
+                                                @Html.ActionLink("Detay", "Details", "Phones", new { id = item.PhoneId }, new { @class = "btn btn-dark" })
+                                                @Html.ActionLink("Sil", "Delete", "Phones", new { id = item.PhoneId }, new { @class = "btn btn-dark" })
                                             </td>
                                         </tr>
 
@@ -85,4 +73,3 @@
             </div>
         </div>
     </footer>
-</div>

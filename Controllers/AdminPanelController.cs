@@ -23,7 +23,7 @@ namespace TelefonSatis.Controllers
         }
         public IActionResult PhoneManagment()
         {
-            return View(_context.Phones.ToList());
+            return View(_context.Phones.Include(p => p.brand));
         }
         public IActionResult BrandManagment()
         {

@@ -91,7 +91,7 @@ namespace TelefonSatis.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PhoneId,Name,Color,Price,MinDesc,Images,Description,TotalScore,TotalPeople,Score,BrandId")] Phone phone)
+        public async Task<IActionResult> Edit(int id, [Bind("PhoneId,Name,Color,Price,MinDesc,Description,TotalScore,TotalPeople,Score,BrandId")] Phone phone)
         {
             if (id != phone.PhoneId)
             {
@@ -116,7 +116,7 @@ namespace TelefonSatis.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("UserManagment", "AdminPanel");
+                return RedirectToAction("PhoneManagment", "AdminPanel");
             }
             ViewData["BrandId"] = new SelectList(_context.Brands, "BrandId", "BrandId", phone.BrandId);
             return View(phone);
@@ -133,7 +133,7 @@ namespace TelefonSatis.Controllers
                 var phone = await _context.Phones.FindAsync(id);
                 _context.Phones.Remove(phone);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("UserManagment", "AdminPanel");
+                return RedirectToAction("PhoneManagment", "AdminPanel");
             }
         }
 
@@ -145,12 +145,74 @@ namespace TelefonSatis.Controllers
             var phone = await _context.Phones.FindAsync(id);
             _context.Phones.Remove(phone);
             await _context.SaveChangesAsync();
-            return RedirectToAction("UserManagment", "AdminPanel");
+            return RedirectToAction("PhoneManagment", "AdminPanel");
         }
 
         private bool PhoneExists(int id)
         {
             return _context.Phones.Any(e => e.PhoneId == id);
         }
+
+
+
+
+        #region Image
+        // GET: Phones/Edit/5
+        public async Task<IActionResult> Image(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var phone = await _context.Phones.FindAsync(id);
+            if (phone == null)
+            {
+                return NotFound();
+            }
+            ViewData["BrandId"] = new SelectList(_context.Brands, "BrandId", "BrandId", phone.BrandId);
+            return View(phone);
+        }
+
+        // POST: Phones/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Image(int id, [Bind("PhoneId,Name,Color,Price,MinDesc,Description,TotalScore,TotalPeople,Score,BrandId")] Phone phone)
+        {
+            if (id != phone.PhoneId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(phone);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PhoneExists(phone.PhoneId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("PhoneManagment", "AdminPanel");
+            }
+            ViewData["BrandId"] = new SelectList(_context.Brands, "BrandId", "BrandId", phone.BrandId);
+            return View(phone);
+        }
+
+        #endregion
+
+
+
     }
 }
